@@ -598,33 +598,33 @@ void
 Printer::print_symbol(std::ostream& os, const Node& node)
 {
   const auto symbol = node.symbol();
-  if (symbol)
-  {
-    if (symbol->get().empty())
-    {
-      os << "||";
-    }
-    else if (parser::smt2::Lexer::is_valid_symbol(symbol->get())
-             || parser::smt2::Lexer::is_valid_quoted_symbol(symbol->get()))
-    {
-      os << symbol->get();
-    }
-    else
-    {
-      if (symbol->get().find('|') != std::string::npos)
-      {
-        throw printer::Exception("invalid symbol '" + symbol->get()
-                                 + "', symbol is not SMT-LIB compliant");
-      }
-      os << "|" << symbol->get() << "|";
-    }
-  }
-  // Default symbol
-  else
-  {
-    os << (node.kind() == Kind::CONSTANT ? "@bzla.const" : "@bzla.var");
-    os << "_" << node.id();
-  }
+  // if (symbol)
+  // {
+  //   if (symbol->get().empty())
+  //   {
+  //     os << "||";
+  //   }
+  //   else if (parser::smt2::Lexer::is_valid_symbol(symbol->get())
+  //            || parser::smt2::Lexer::is_valid_quoted_symbol(symbol->get()))
+  //   {
+  //     os << symbol->get();
+  //   }
+  //   else
+  //   {
+  //     if (symbol->get().find('|') != std::string::npos)
+  //     {
+  //       throw printer::Exception("invalid symbol '" + symbol->get()
+  //                                + "', symbol is not SMT-LIB compliant");
+  //     }
+  //     os << "|" << symbol->get() << "|";
+  //   }
+  // }
+  // // Default symbol
+  // else
+  // {
+  os << (node.kind() == Kind::CONSTANT ? "@bzla.const" : "@bzla.var");
+  os << "_" << node.id();
+  // }
 }
 
 void
